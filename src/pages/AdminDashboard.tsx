@@ -160,9 +160,10 @@ const AdminOverview: React.FC = () => {
 
   // Add delete and edit handlers for recent posts
   const handleDelete = async (id: string) => {
+    console.log(id);
     if (!window.confirm("Are you sure you want to delete this post?")) return;
     try {
-      const res = await fetch(`${API_URL}/admin/posts/${id}`, {
+      const res = await fetch(`${API_URL}/posts/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -500,7 +501,7 @@ const AdminSettings: React.FC = () => {
             </label>
             <input
               type="text"
-              defaultValue="Hard Clone"
+              defaultValue="Hard"
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
             />
           </div>

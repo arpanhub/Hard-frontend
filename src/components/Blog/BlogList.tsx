@@ -10,7 +10,7 @@ const BlogList: React.FC = () => {
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Fetch posts from backend
+
   useEffect(() => {
     setLoading(true);
     let url = `${API_URL}/posts`;
@@ -22,7 +22,7 @@ const BlogList: React.FC = () => {
       .then(data => {
         if (data.success && Array.isArray(data.data)) {
           setPosts(data.data);
-          // Collect all unique tags from posts
+          console.log(data);
           const tags:any = Array.from(
             new Set(data.data.flatMap((post: any) => post.tags || []))
           ).sort();
@@ -39,24 +39,33 @@ const BlogList: React.FC = () => {
       .finally(() => setLoading(false));
   }, [selectedTag]);
 
-  const handleLike = async (postId: string) => {
-    setPosts(prevPosts =>
-      prevPosts.map(post =>
-        post._id === postId
-          ? {
+  const handleLike = async (postId:string) => {
+    try {
+      const token = localStorage.getItem('token');
+      const res = await fetch(`${API_URL}/posts/${postId}/like`, {
+        method: 'PUT',
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const data = await res.json();
+      if(res.ok && data.success){
+        setPosts(prevPosts=>
+          prevPosts.map(post=>
+            post.id === postId
+            ?{
               ...post,
-              isLiked: !post.isLiked,
-              likes: post.isLiked ? post.likes - 1 : post.likes + 1
-            }
-          : post
-      )
-    );
+              isLiked:!post.isLiked,
+              likes:post.isLiked?post.likes-1:post.likes+1
+            } : post      
+          )
+        )
+      }
+    } catch {}
   };
 
   const handleBookmark = (postId: string) => {
     setPosts(prevPosts =>
       prevPosts.map(post =>
-        post._id === postId
+        post.id === postId
           ? { ...post, isBookmarked: !post.isBookmarked }
           : post
       )
@@ -119,9 +128,9 @@ const BlogList: React.FC = () => {
         ) : filteredPosts.length > 0 ? (
           filteredPosts.map(post => (
             <BlogCard
-              key={post._id}
+              key={post.id}
               post={post}
-              onLike={handleLike}
+              onLike={()=>handleLike(post.id)}
               onBookmark={handleBookmark}
             />
           ))

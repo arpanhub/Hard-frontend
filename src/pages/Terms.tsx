@@ -148,9 +148,9 @@ const Terms: React.FC = () => {
           </p>
           <div className="bg-gray-50 rounded-lg p-4">
             <p className="text-gray-700">
-              Email: legal@Hardom<br />
+              Email: arpangupta644@gmail.com<br />
               Address: 123 Main Street, City, State 12345<br />
-              Phone: (555) 123-4567
+              Phone: +91 9307669216
             </p>
           </div>
         </section>

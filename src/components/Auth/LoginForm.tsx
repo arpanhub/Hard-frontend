@@ -31,22 +31,6 @@ const LoginForm: React.FC = () => {
     }
   };
 
-  const handleDemoLogin = async (userType: 'admin' | 'user') => {
-    setError('');
-    setIsLoading(true);
-
-    try {
-      // Use seeded demo credentials
-      const demoEmail = userType === 'admin' ? 'admin@example.com' : 'demo1@example.com';
-      const demoPassword = userType === 'admin' ? 'admin123' : 'password123';
-      await login(demoEmail, demoPassword);
-      navigate(from, { replace: true });
-    } catch (err: any) {
-      setError('Demo login failed');
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">

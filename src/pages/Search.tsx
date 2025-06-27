@@ -4,6 +4,8 @@ import { Search as SearchIcon, X } from 'lucide-react';
 import BlogCard from '../components/Blog/BlogCard';
 import { searchPosts } from '../data/mockData';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const Search: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState(searchParams.get('q') || '');
@@ -24,13 +26,19 @@ const Search: React.FC = () => {
     
     setIsLoading(true);
     setHasSearched(true);
-    
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 500));
-    
-    const searchResults = searchPosts(searchQuery);
-    setResults(searchResults);
-    setIsLoading(false);
+    try{
+      const res = await fetch(`${API_URL}/posts?q=${encodeURIComponent(searchQuery)}`);
+      const data = await res.json();
+      if(res.ok && data.success && Array.isArray(data.data)){
+        setResults(data.data);
+      }else{
+        setResults([]);
+      }
+    }catch{
+      setResults([]);
+    }finally{
+      setIsLoading(false);
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {

@@ -182,25 +182,6 @@ useEffect(() => {
             </button>
 
             <button
-              onClick={() => setShowComments(!showComments)}
-              className="flex items-center space-x-1 px-3 py-2 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors"
-            >
-              <MessageCircle className="w-4 h-4" />
-              <span className="text-sm font-Hard">{post.comments?.length || 0}</span>
-            </button>
-
-            <button
-              onClick={handleBookmark}
-              className={`p-2 rounded-full transition-colors ${
-                post.isBookmarked
-                  ? 'bg-green-50 text-green-600'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-              }`}
-            >
-              <Bookmark className={`w-4 h-4 ${post.isBookmarked ? 'fill-current' : ''}`} />
-            </button>
-
-            <button
               onClick={handleShare}
               className="p-2 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors"
             >
@@ -239,44 +220,6 @@ useEffect(() => {
       <article className="prose prose-lg max-w-none mb-12">
         <div dangerouslySetInnerHTML={{ __html: post.content }} />
       </article>
-
-      {/* Author Bio */}
-      <div className="border-t border-gray-200 pt-8 mb-8">
-        <div className="flex items-start space-x-4">
-          <Link to={`/profile/${post.author.id}`}>
-            {post.author.avatar ? (
-              <img
-                src={post.author.avatar}
-                alt={post.author.name}
-                className="w-16 h-16 rounded-full object-cover"
-              />
-            ) : (
-              <div className="w-16 h-16 rounded-full bg-gray-300 flex items-center justify-center">
-                <User className="w-8 h-8 text-gray-600" />
-              </div>
-            )}
-          </Link>
-          <div className="flex-1">
-            <Link to={`/profile/${post.author.id}`}>
-              <h3 className="text-lg font-semibold text-gray-900 hover:text-gray-700">
-                {post.author.name}
-              </h3>
-            </Link>
-            {post.author.bio && (
-              <p className="text-gray-600 mt-1">{post.author.bio}</p>
-            )}
-          </div>
-        </div>
-      </div>
-
-      {/* Comments Section */}
-      {showComments && (
-        <CommentSection
-          postId={post._id}
-          comments={post.comments}
-          onClose={() => setShowComments(false)}
-        />
-      )}
     </div>
   );
 };

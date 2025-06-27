@@ -31,6 +31,7 @@ export const useAuth = () => {
 };
 
 const API_URL = import.meta.env.VITE_API_URL;
+console.log(API_URL)
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -67,7 +68,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
+      console.log("Res:", res)
       const data = await res.json();
+      console.log(data)
       if (!res.ok) throw new Error(data.message || 'Login failed');
       localStorage.setItem('token', data.token);
       setUser(data.user);

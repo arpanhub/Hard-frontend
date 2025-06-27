@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
             </div>
           </div>
           <div className="text-sm text-gray-500">
-            © 2024 Hard Clone. All rights reserved.
+            © 2025 Hard. All rights reserved.
           </div>
         </div>
       </div>

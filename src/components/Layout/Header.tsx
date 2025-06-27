@@ -64,12 +64,6 @@ const Header: React.FC = () => {
                   <span className="text-sm">Write</span>
                 </Link>
 
-                {/* Notifications */}
-                <button className="relative p-2 text-gray-600 hover:text-gray-900 transition-colors">
-                  <Bell className="h-5 w-5" />
-                  <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-                </button>
-
                 {/* Profile Dropdown */}
                 <div className="relative">
                   <button

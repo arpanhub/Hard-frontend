@@ -79,18 +79,6 @@ const Profile: React.FC = () => {
               )}
             </div>
           </div>
-          
-          {isOwnProfile && (
-            <div className="flex items-center space-x-3 mt-4 sm:mt-0">
-              <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
-                <Edit3 className="h-4 w-4" />
-                <span>Edit Profile</span>
-              </button>
-              <button className="p-2 text-gray-600 hover:text-gray-900 transition-colors">
-                <Settings className="h-5 w-5" />
-              </button>
-            </div>
-          )}
         </div>
 
         {profileUser.bio && (

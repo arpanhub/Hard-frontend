@@ -98,20 +98,6 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, onLike, onBookmark }) => {
                 <span>{post.likes}</span>
               </button>
 
-              <button
-                onClick={handleBookmark}
-                className={`p-1 transition-colors ${
-                  post.isBookmarked ? 'text-green-600' : 'text-gray-500 hover:text-gray-700'
-                }`}
-              >
-                <Bookmark
-                  className={`w-4 h-4 ${post.isBookmarked ? 'fill-current' : ''}`}
-                />
-              </button>
-
-              <button className="p-1 text-gray-500 hover:text-gray-700 transition-colors">
-                <MoreHorizontal className="w-4 h-4" />
-              </button>
             </div>
           </div>
         </div>
