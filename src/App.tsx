@@ -39,7 +39,8 @@ function App() {
             {/* Auth routes (no layout) */}
             <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<RegisterForm />} />
-            <Route path="/verify-email/:token" element={<VerifyEmail />} />
+            <Route path="/verify-email" element={<VerifyEmail />} />
+            <Route path="/verify-email/:token" element={<VerifyEmail />} />            
             <Route path="/forgot-password" element={<ForgotPassword />} />
 
             {/* Protected routes */}
